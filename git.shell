@@ -1,0 +1,15 @@
+#!/bin/bash
+
+homedir="/Users/yougui/zuoyebang/php/"
+
+for dir in $(ls ${homedir})
+do
+	echo $dir
+	cd $homedir$dir
+	br=`git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3`
+	if [ br != "dev" ]
+	then
+		git checkout dev		
+	fi	
+	git pull origin dev:dev
+done
